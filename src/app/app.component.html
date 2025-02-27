@@ -1,5 +1,14 @@
-<!-- <app-home-page></app-home-page> -->
-<a routerLink="/homePage">home page</a>
-<div></div>
-<a routerLink="/addCourse">add Courses</a>
+<!-- <div></div> -->
+<!-- <a routerLink="/addCourse">add Courses</a> -->
+@if(this.token===null){
+    <a routerLink="/login">Login</a>
+    <div></div>
+    <a routerLink="/register">Register</a>
+    <router-outlet></router-outlet>
+}
+@else { 
+    <app-home-page></app-home-page>
+<!-- <a routerLink="/homePage">home page</a> -->
+}
+
 <router-outlet></router-outlet>

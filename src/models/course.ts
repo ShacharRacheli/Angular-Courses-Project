@@ -8,10 +8,19 @@ export class Lesson{
 }
 export class Course{
     constructor(
-        public id:number,
+public id:number,
 public title:string,
 public description:string,
 public teacherId:number,
-public lessons:Lesson[],
+public lessons?:Lesson[],
     ){}
 }
+// export class Course1{
+//     constructor(
+//         public id:number,
+// public title:string,
+// public description:string,
+// public teacherId:number,
+// public lessons:Lesson[],
+//     ){}
+// }
