@@ -1,0 +1,16 @@
+<p>courses works!</p>
+<h2>רשימת הקורסים</h2>
+@if(allCourses){
+    <ul>
+@for(course of allCourses;track $index){
+<li>{{course.title}} {{course.description}} {{course.teacherId}}
+  @for(lesson of course.lessons;track $index){
+    <li>{{lesson.content}} {{lesson.title}}</li>
+  }
+</li>
+}
+</ul> 
+}
+@else {
+   <div>no courses </div>
+}

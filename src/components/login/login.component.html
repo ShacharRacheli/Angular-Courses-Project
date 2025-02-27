@@ -1,0 +1,36 @@
+<!-- <div>Login</div>
+<form [formGroup]="userLoginForm"(ngSubmit)="onSubmit()">
+<label for="email">email:</label>
+<input id="email" formControlName="email" required>
+@if (u['email']&&u['email'].errors) {}
+<label for="password">password</label>
+<input id="password" formControlName="password" required>
+@if (u['password']&&u['password'].errors) {}
+
+<button type="submit" [disabled]="userLoginForm.invalid">Submit</button>
+</form> -->
+<form [formGroup]="userLoginForm" (ngSubmit)="onSubmit()">
+    <label for="email">email:</label>
+    <input id="email" formControlName="email" required>
+    @if (user['email']&&user['email'].errors && user['email'].touched) {
+        @if(user['email'].errors["required"]) {
+            <div>email is required</div>
+        }
+        @if(user["email"].errors["email"]) {
+        <div>email is not valid</div>
+        }
+    }
+    
+    <label for="password">password</label>
+    <input id="password" formControlName="password" required>
+    @if (user['password']&&user['password'].errors && user['password'].touched) {
+        @if(user['password'].errors["required"]) {
+            <div>password is required</div>
+        }
+        @if(user["password"].errors["minlength"]) {
+        <div>password must be at least 5 characters</div>
+        }
+    }
+
+    <button type="submit" [disabled]="userLoginForm.invalid">Submit</button>
+</form>

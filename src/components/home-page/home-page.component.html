@@ -1,0 +1,12 @@
+
+
+<div class="profile-circle">{{this.userName.charAt(0).toUpperCase()}}</div>
+@if(this.token===null){
+    <a routerLink="/login">Login</a>
+    <div></div>
+    <a routerLink="/register">Register</a>
+    <router-outlet></router-outlet>
+}
+<!-- <a routerLink="/addCourse">add Courses</a> -->
+
+<app-courses></app-courses>

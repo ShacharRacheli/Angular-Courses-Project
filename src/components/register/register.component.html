@@ -1,0 +1,68 @@
+<!-- <div>Register</div>
+<form [formGroup]="userRegisterForm"(ngSubmit)="onSubmit()">
+    <label for="name">name</label>
+    <input id="name" formControlName="name" required>
+    @if (u['name']&&u['name'].errors) {}
+<label for="email">email:</label>
+<input id="email" formControlName="email" required>
+@if (u['email']&&u['email'].errors) {}
+<label for="password">password</label>
+<input id="password" formControlName="password" required>
+@if (u['password']&&u['password'].errors) {}
+<label for="role">role</label>
+<input id="role" formControlName="role" required>
+@if (u['role']&&u['role'].errors) {}
+<mat-form-field>
+    <mat-label for="role">role</mat-label>
+    <select id="role" formControlName="role" matNativeControl required>
+      <option value="student">student</option>
+      <option value="teacher">teacher</option>
+      <option value="admin">admin</option>
+    </select>
+  </mat-form-field> -->
+<!-- 
+<button type="submit" [disabled]="userRegisterForm.invalid">Submit</button>
+</form> -->
+<div>Register</div>
+<form [formGroup]="userRegisterForm" (ngSubmit)="onSubmit()">
+    <label for="name">name</label>
+    <input type="text" id="name" formControlName="name" required>
+    @if (user['name']&&user['name'].errors && user['name'].touched && user['name'].errors["required"]) {
+       <div>name is required</div>
+    }
+
+    <label for="email">email:</label>
+    <input id="email" formControlName="email" required>
+    @if (user['email']&&user['email'].errors && user['email'].touched &&user['email'].errors["required"]) {
+        <div>email is required</div>
+    }
+
+    <label for="password">password</label>
+    <input id="password" formControlName="password" required>
+    @if (user['password']&&user['password'].errors &&user['password'].touched) {
+        @if(user["password"].errors["required"]) {
+            <div>password is required</div>
+            }
+            @if(user["password"].errors["minlength"]) {
+            <div>password must be at least 4 characters</div>
+            }
+            @if(user["password"].errors["maxlength"]) {
+            <div>password must be at most 8 characters</div>
+            
+        }
+    }
+    
+    <label for="role">role</label>
+    <select id="role" formControlName="role" required>
+        <option value="admin">admin</option>
+        <option value="student">student</option>
+        <option value="teacher">teacher</option>
+    </select>
+
+
+    @if (user['role']&&user['role'].errors &&user['role'].touched &&user['role'].errors["required"]) {
+        <div>role is required</div>
+    }
+
+    <button type="submit" [disabled]="userRegisterForm.invalid">Submit</button>
+</form>

@@ -1,0 +1,40 @@
+<form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+    <label for="title">title</label>
+    <input id="title" formControlName="title" required>
+    @if (course['title']&&course['title'].errors &&course['title'].touched) {
+            @if(course['title'].errors["required"]) {
+                <div>title is required</div>
+            }
+            @if(course["title"].errors["minlength"]) {
+            <div>title must be at least 4 characters</div>
+            }
+            @if(course["title"].errors["maxlength"]) {
+            <div>title must be at most 8 characters</div>
+            
+        }
+    }
+
+    <label for="description">description:</label>
+    <input id="description" formControlName="description" required>
+    @if (course['description']&&course['description'].errors &&course['description'].touched) {
+        @if(course['description'].errors["required"]) {
+            <div>description is required</div>
+        }
+        @if(course["description"].errors["minlength"]) {
+        <div>description must be at least 15 characters</div>
+        }
+    }
+
+    <label for="teacherId">teacherId</label>
+    <input id="teacherId" formControlName="teacherId" required>
+    @if (course['teacherId']&&course['teacherId'].errors &&course['teacherId'].touched) {
+        @if(course['teacherId'].errors["required"]) {
+            <div>teacherId is required</div>
+        }
+        @if(course["teacherId"].errors["min"]) {
+        <div>teacherId must be greater than 1</div>
+        }
+    }
+
+    <button type="submit" [disabled]="courseForm.invalid">Submit</button>
+</form>
