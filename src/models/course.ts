@@ -7,8 +7,6 @@ export class Lesson{
     ){}
 }
 export class Course{
-    course: any;
-    [x: string]: any;
     constructor(
 public id:number,
 public title:string,

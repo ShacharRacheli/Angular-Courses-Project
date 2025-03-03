@@ -4,15 +4,19 @@ import { Course, Lesson } from '../models/course';
 import { Observable } from 'rxjs/internal/Observable';
 import { jwtDecode } from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
+import { __values } from 'tslib';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
   private courseSubject:BehaviorSubject<Course[]> = new BehaviorSubject<Course[]>([]);
+  private myCourseSubject:BehaviorSubject<Course[]> = new BehaviorSubject<Course[]>([]);
   allCourses$:Observable<Course[]>;
+ myCourses$:Observable<Course[]>;
   constructor(private http:HttpClient) { 
 this.allCourses$=this.courseSubject.asObservable();
+ this.myCourses$=this.myCourseSubject.asObservable();
   }
   getCourses(){
   this.http.get<Course[]>('http://localhost:3000/api/courses').subscribe({
@@ -26,12 +30,26 @@ this.allCourses$=this.courseSubject.asObservable();
       console.error('Failed to fetch courses', error);
   }})
   }
-getCourseById(courseId:number){
-  this.http.get<Course>(`http://localhost:3000/api/courses/${courseId}`).subscribe({
-    next:course=>{
-
+// getCourseById(courseId:number){
+//   this.http.get<Course>(`http://localhost:3000/api/courses/${courseId}`).subscribe({
+//     next:(data)=>{
+//       this.getLessonsByCourse(courseId);
+//      this.currentCourseSubject.next(data)
+//     },error:(e)=>{
+//       console.error('Failed to fetch course', e);
+//     }
+//   })
+//  }
+getMyCourses(){
+  const studentId=this.getUserIdByToken()
+  this.http.get<Course[]>(`http://localhost:3000/api/courses/student/${studentId}`).subscribe({
+    next:(data)=>{
+      data.forEach(course=>{
+        this.getLessonsToMyCourse(course.id)
+          })
+this.myCourseSubject.next(data)
     },error:(e)=>{
-
+      console.error('Failed to fetch my courses', e);
     }
   })
 }
@@ -43,6 +61,18 @@ getCourseById(courseId:number){
           if (courseToUpdate) {
             courseToUpdate.lessons = lessons;
             this.courseSubject.next([...courses]);
+          }
+        }
+      });
+    }
+    getLessonsToMyCourse(courseId: number){
+      this.http.get<Lesson[]>(`http://localhost:3000/api/courses/${courseId}/lessons`).subscribe({
+        next: (lessons) => {
+          const courses = this.myCourseSubject.getValue();
+          const courseToUpdate = courses.find(course => course.id === courseId);
+          if (courseToUpdate) {
+            courseToUpdate.lessons = lessons;
+            this.myCourseSubject.next([...courses]);
           }
         }
       });
@@ -74,14 +104,7 @@ this.getCourses();
     }
    })
   }
-  // deleteLessonsByCourseId(courseId:number){
-  // this.http.delete(`http://localhost:3000/api/courses/${courseId}/lessons`).subscribe({
-  //   next:response=>{
-  //     this.getCourses();
-  //     this.getLessonsByCourse(courseId)
-  //   }
-  // })
-  // }
+
   deleteLesson(courseId:number,lessonId:number){
     this.http.delete(`http://localhost:3000/api/courses/${courseId}/lessons/${lessonId}`).subscribe({
       next:response=>{
@@ -122,6 +145,16 @@ this.getCourses();
 
       }
     })
+  }
+  deleteCurrentCourseForUser(courseId:number){
+    const userId=this.getUserIdByToken()
+this.http.delete(`http://localhost:3000/api/courses/${courseId}/unenroll`,{body:{userId}}).subscribe({
+  next:(response)=>{
+    this.getCourses();
+  },error:(e)=>{
+
+  }
+})
   }
   getRoleByToken():string{
     const token = sessionStorage.getItem('token');

@@ -29,6 +29,6 @@ export const routes: Routes = [
    {path:'auth',component:AuthComponent},
    {path:'coursesForTeacherManager',component:CoursesComponent,canActivate:[teacherManagerGuard]},
    {path:'coursesForAll',component:CourseDetailsComponent,},
-   {path:'currentCourseLessons/:id',component:MyCoursesComponent,},
+   {path:'myCourses',component:MyCoursesComponent,},
     
 ];
