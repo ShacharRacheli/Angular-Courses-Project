@@ -15,11 +15,11 @@ justify-content: center;
 /* align-items: center; */
   width: 70%;
   }
-  /* button[mat-button] {
-    margin-right: 8px;
-    border-radius: 30px;
-    height: 50px;
-  } */
+  mat-panel-title{
+    display: flex; 
+    justify-content: space-between;
+     width: 80%;
+  }
 .any-button{
   background-color: #7ad4c5; /* Custom background color */
   color: white; /* Custom text color */
@@ -28,15 +28,10 @@ justify-content: center;
   font-size: 16px; /* Custom font size */
   border: none; /* Remove default border */
   transition: background-color 0.3s; 
-  height: 30px;
+  height: 28px;
   margin: 8px;
 }
-.register-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh; /* גובה מלא של המסך */
-}
+
 
 mat-card {
   width: 300px; /* רוחב קבוע */
@@ -57,3 +52,20 @@ mat-card {
   justify-content: flex-end; /* Aligns the form to the right */
 }
 
+.courses-container {
+    display: flex;
+    justify-content: center; /* Center the accordion */
+    width: 100%; /* Full width of the parent */
+    margin-top: 40px; /* Add space from the top */
+  }
+  
+  mat-accordion {
+    width: 60%; /* Set the accordion width to 60% */
+  }
+  
+  mat-expansion-panel {
+    margin-bottom: 15px; /* Space between each course */
+  }
+  span{
+    font-weight: bold
+  }
