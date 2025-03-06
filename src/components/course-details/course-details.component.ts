@@ -24,10 +24,7 @@ export class CourseDetailsComponent {
   addCourseToUser(courseId:number){
 this.coursesService.addCourseToUser(courseId);
   }
-  deleteCurrentCourse(courseId:number){
-this.coursesService.deleteCurrentCourseForUser(courseId)
-  }
-//   currentCourseLesson(courseId:number){
-// this.router.navigate(['/currentCourseLessons',courseId])
+//   deleteCurrentCourse(courseId:number){
+// this.coursesService.deleteCurrentCourseForUser(courseId)
 //   }
 }

@@ -10,7 +10,6 @@ const status=service.getRoleByToken()
 console.log(status);
 
 if(status==='admin'||status==='teacher'){
-  // router.navigate(['/coursesForTeacherManager'])
   return true;
 }
   return false;

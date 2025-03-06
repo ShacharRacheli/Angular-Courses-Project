@@ -12,7 +12,6 @@ mat-list-item {
   .courses-lessons{
     display: flex;
 justify-content: center;  
-/* align-items: center; */
   width: 70%;
   }
   mat-panel-title{
@@ -21,18 +20,16 @@ justify-content: center;
      width: 80%;
   }
 .any-button{
-  background-color: #7ad4c5; /* Custom background color */
-  color: white; /* Custom text color */
-  border-radius: 8px; /* Custom border radius */
-  padding: 10px 22px; /* Custom padding */
-  font-size: 16px; /* Custom font size */
-  border: none; /* Remove default border */
+  background-color: #7ad4c5; 
+  color: white; 
+  border-radius: 8px; 
+  padding: 10px 22px; 
+  font-size: 16px;
+  border: none;
   transition: background-color 0.3s; 
   height: 28px;
   margin: 8px;
 }
-
-
 mat-card {
   width: 300px; /* רוחב קבוע */
   text-align: center; /* מרכז את הטקסט */
@@ -49,7 +46,6 @@ mat-card {
 }
 .container {
   display: flex;
-  justify-content: flex-end; /* Aligns the form to the right */
 }
 
 .courses-container {

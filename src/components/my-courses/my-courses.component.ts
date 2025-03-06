@@ -27,5 +27,8 @@ myCourse$!:Observable<Course[]>
 this.myCourse$
 })
 }
+deleteCurrentCourse(courseId:number){
+  this.courseService.deleteCurrentCourseForUser(courseId)
+    }
 
 }

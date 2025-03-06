@@ -9,15 +9,13 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
-export class HomePageComponent implements OnInit{
-token:any=''
-  userName!:string
-  constructor(private authService:AuthService){}
-  ngOnInit(): void {
-
-    this.token=this.authService.getToken();
-    this.userName=this.authService.getUserNameFromToken();
-  }
-  
-
+export class HomePageComponent {
+  // export class HomePageComponent implements OnInit{
+  // token:any=''
+  // userName!:string
+  // constructor(private authService:AuthService){}
+  // ngOnInit(): void {
+  //   this.token=this.authService.getToken();
+  //   this.userName=this.authService.getUserNameFromToken();
+  // }
 }

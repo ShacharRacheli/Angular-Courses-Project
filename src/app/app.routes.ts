@@ -10,19 +10,7 @@ import { CourseDetailsComponent } from '../components/course-details/course-deta
 import { MyCoursesComponent } from '../components/my-courses/my-courses.component';
 
 export const routes: Routes = [
-//     {path:'homePage',component:HomePageComponent,
-//         children:[
-//             {path:'login',
-//                 component:LoginComponent,
-//                 //  outlet: 'secondary' // הגדרת outlet משני
-// },
-//             {path:'register',
-//                 component:RegisterComponent,
-//                 // outlet: 'secondary' // הגדרת outlet משני
-//             },
-//    ]
-//     },
-{ path: '', redirectTo: 'homePage', pathMatch: 'full' },
+   { path: '', redirectTo: 'homePage', pathMatch: 'full' },
    {path:'homePage',component:HomePageComponent,canActivate:[authGuard]},
    {path:'login',component:LoginComponent},
    {path:'register',component:RegisterComponent},
@@ -30,5 +18,4 @@ export const routes: Routes = [
    {path:'coursesForTeacherManager',component:CoursesComponent,canActivate:[teacherManagerGuard]},
    {path:'coursesForAll',component:CourseDetailsComponent,},
    {path:'myCourses',component:MyCoursesComponent,},
-    
 ];

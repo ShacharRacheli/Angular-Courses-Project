@@ -1,24 +1,12 @@
-<!-- <div></div> -->
-<!-- <a routerLink="/addCourse">add Courses</a> -->
-<!-- @if(this.token===null){
-    <a routerLink="/login">Login</a>
-    <div></div>
-    <a routerLink="/register">Register</a>
-    <router-outlet></router-outlet>
-} -->
-<!-- @else { 
-    } -->
-    <!-- <app-home-page></app-home-page> -->
     <mat-toolbar color="primary" class="nav-container">
         <nav class="nav-links">
-          <a mat-button routerLink="/homePage" routerLinkActive="active">🏠 Home</a>
+          <a mat-button routerLink="/homePage" routerLinkActive="active">Home</a>
           <a mat-button routerLink="/coursesForAll" routerLinkActive="active">Course List</a>
           <a mat-button routerLink="/coursesForTeacherManager" routerLinkActive="active">Teachers and Manager</a>
-          <a mat-button routerLink="/myCourses" routerLinkActive="active">My courses </a>
+          <a mat-button routerLink="/myCourses" routerLinkActive="active">My courses</a>
         </nav>
       </mat-toolbar>
-      
-      <router-outlet></router-outlet>
-<!-- <a routerLink="/homePage">home page</a> -->
-<!-- <router-outlet></router-outlet> -->
+<div class="profile-circle">{{this.userName.charAt(0).toUpperCase()}}</div>
+
+<router-outlet></router-outlet>
 

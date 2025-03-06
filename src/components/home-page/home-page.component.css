@@ -1,17 +1,14 @@
-.profile-circle {
+/* .profile-circle {
     width: 40px;
     height: 40px;
     background-color: #70b2b1;
-    /* צבע רקע */
     color: white;
-    /* צבע טקסט */
     font-size: 20px;
     font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    /* יוצר עיגול */
     position: absolute;
     top: 10px;
     left: 10px;
@@ -23,4 +20,10 @@
     top: 10px;
     left: 10px;
     z-index: 1000;
-}
+} */
+ h1{
+    text-align: center;
+ }
+ h3{
+    text-align: center;
+ }
