@@ -6,7 +6,8 @@
           <a mat-button routerLink="/myCourses" routerLinkActive="active">My courses</a>
         </nav>
       </mat-toolbar>
+      @if (token!=null) {
 <div class="profile-circle">{{this.userName.charAt(0).toUpperCase()}}</div>
-
+      }
 <router-outlet></router-outlet>
 

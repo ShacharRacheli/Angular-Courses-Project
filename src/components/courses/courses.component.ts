@@ -17,76 +17,65 @@ import { MatExpansionModule } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-courses',
-  imports: [AsyncPipe,ReactiveFormsModule,MatListModule,MatButtonModule,NgTemplateOutlet,MatButtonModule,
+  imports: [AsyncPipe, ReactiveFormsModule, MatListModule, MatButtonModule, NgTemplateOutlet, MatButtonModule,
     MatInputModule,
     MatFormFieldModule,
     MatListModule,
-    MatCardModule,MatExpansionModule],
+    MatCardModule, MatExpansionModule],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css'
 })
 export class CoursesComponent implements OnInit {
-  role: string = ''
   courseForm!: FormGroup
   lessonForm!: FormGroup
-  // lessonAddForm!: FormGroup
-  lessonFormValues!:any
-  lessonUpdate!:Lesson;
-  lessonAdd!:Lesson;
-  idCurrentLesson:number=-1;
+  lessonUpdate!: Lesson;
+  lessonAdd!: Lesson;
+  idCurrentLesson: number = -1;
   isUpdate: boolean = false
   idCurrentCourse: number = -1
-  currentCourse: any;
-  courseUpdate!:Course;
-  courseAdd!:Course;
-  isUpdateLesson:Boolean=false
-  isAddLesson:Boolean=false
-  courseIsLessonUpdate:number=-1
-isAddCourse:boolean=false
-  allCourses$:Observable<Course[]>;
-
-  // allLessons$:Observable<Lesson[]>;
-setIsAddCourse(){
-  this.isAddCourse=!this.isAddCourse
-}
+  courseUpdate!: Course;
+  isUpdateLesson: Boolean = false
+  isAddLesson: Boolean = false
+  courseIsLessonUpdate: number = -1
+  isAddCourse: boolean = false
+  allCourses$: Observable<Course[]>;
+  setIsAddCourse() {
+    this.isAddCourse = !this.isAddCourse
+  }
 
   setIsUpdate(course: Course) {
     this.isUpdate = !this.isUpdate
-    // this.currentCourse = course;
     this.idCurrentCourse = course.id
     this.courseForm.setValue({
       title: course.title,
       description: course.description,
     });
   }
-  setIsUpdateLesson(lesson:Lesson){
-    this.isUpdateLesson=!this.isUpdateLesson;
-    this.idCurrentLesson=lesson.id;
-    this.courseIsLessonUpdate=lesson.courseId
-this.lessonForm.setValue({
-  title: lesson.title,
-  content: lesson.content,
-})
+  setIsUpdateLesson(lesson: Lesson) {
+    this.isUpdateLesson = !this.isUpdateLesson;
+    this.idCurrentLesson = lesson.id;
+    this.courseIsLessonUpdate = lesson.courseId
+    this.lessonForm.setValue({
+      title: lesson.title,
+      content: lesson.content,
+    })
   }
-  setIsAddLesson(courseId:number){
-    this.isAddLesson=!this.isAddLesson
-    this.idCurrentCourse=courseId;
+  setIsAddLesson(courseId: number) {
+    this.isAddLesson = !this.isAddLesson
+    this.idCurrentCourse = courseId;
   }
 
-  constructor(private coursesService: CoursesService, private fb: FormBuilder) { 
-    this.allCourses$=this.coursesService.allCourses$
+  constructor(private coursesService: CoursesService, private fb: FormBuilder) {
+    this.allCourses$ = this.coursesService.allCourses$
     this.coursesService.getCourses()
   }
   ngOnInit(): void {
-
-    this.role = this.coursesService.getRoleByToken()
     this.coursesService.getUserIdByToken()
     this.courseForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
       description: ['', [Validators.required, Validators.minLength(15)]],
-      // teacherId: ['', [Validators.required, Validators.min(1)]],
     })
-    this.lessonForm=this.fb.group({
+    this.lessonForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
       content: ['', [Validators.required, Validators.minLength(15)]],
     })
@@ -101,44 +90,38 @@ this.lessonForm.setValue({
   deleteCourse(courseId: number) {
     this.coursesService.deleteCourse(courseId)
   }
-  onSubmitLesonUpdate(){
-    this.isUpdateLesson=!this.isUpdateLesson
-    this.lessonUpdate=this.lessonForm.value
-    this.lessonUpdate.id=this.idCurrentLesson
-    this.lessonUpdate.courseId=this.courseIsLessonUpdate
+  onSubmitLesonUpdate() {
+    this.isUpdateLesson = !this.isUpdateLesson
+    this.lessonUpdate = this.lessonForm.value
+    this.lessonUpdate.id = this.idCurrentLesson
+    this.lessonUpdate.courseId = this.courseIsLessonUpdate
     this.coursesService.updateLesson(this.lessonUpdate)
-
   }
   onSubmitCourseUpdate() {
     this.updateCourse()
     this.isUpdate = !this.isUpdate
   }
-  // onSubmitAddCourse(){
-  //   this.courseAdd=this.courseForm.value
-  //   this.courseAdd.teacherId=this.coursesService.getUserIdByToken()
-  //   this.coursesService.addNewCourse(this.courseAdd)
-  // }
   updateCourse() {
-    this.courseUpdate=this.courseForm.value;
-this.courseUpdate.teacherId=this.coursesService.getUserIdByToken();
-this.courseUpdate.id=this.idCurrentCourse;
+    this.courseUpdate = this.courseForm.value;
+    this.courseUpdate.teacherId = this.coursesService.getUserIdByToken();
+    this.courseUpdate.id = this.idCurrentCourse;
     this.coursesService.updateCourse(this.courseUpdate)
   }
-onSubmitAddLesson(){
-  this.isAddLesson=!this.isAddLesson
-  this.lessonAdd=this.lessonForm.value
-  this.lessonAdd.courseId=this.idCurrentCourse
-  this.coursesService.addLesson(this.lessonAdd)
+  onSubmitAddLesson() {
+    this.isAddLesson = !this.isAddLesson
+    this.lessonAdd = this.lessonForm.value
+    this.lessonAdd.courseId = this.idCurrentCourse
+    this.coursesService.addLesson(this.lessonAdd)
 
-}
+  }
 
-deleteLesson(courseId:number,lessonId:number){
-this.coursesService.deleteLesson(courseId,lessonId);
-}
-onSubmitAddCourse(){
-  this.courseUpdate=this.courseForm.value;
-this.courseUpdate.teacherId=this.coursesService.getUserIdByToken();
+  deleteLesson(courseId: number, lessonId: number) {
+    this.coursesService.deleteLesson(courseId, lessonId);
+  }
+  onSubmitAddCourse() {
+    this.courseUpdate = this.courseForm.value;
+    this.courseUpdate.teacherId = this.coursesService.getUserIdByToken();
     this.coursesService.addNewCourse(this.courseUpdate)
-    this.isAddCourse=!this.isAddCourse
-}
+    this.isAddCourse = !this.isAddCourse
+  }
 }
